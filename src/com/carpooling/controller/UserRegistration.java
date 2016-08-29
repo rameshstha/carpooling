@@ -41,7 +41,7 @@ public class UserRegistration extends HttpServlet {
 		
 			if (userDAO.createUser(fullname, gender, state, city, street, zip, birthyear, email, password)){
 				request.setAttribute("username", email);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				response.sendRedirect("home.jsp");
 			}	
 			else
 				response.sendRedirect("newProfile.jsp");

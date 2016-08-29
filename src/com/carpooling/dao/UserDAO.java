@@ -25,8 +25,9 @@ public class UserDAO {
 					+ "'";
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
-			if (rs != null)
-				return true;
+			if (rs == null)
+				return false;
+			return true;
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -27,9 +27,9 @@ public class UserLogin extends HttpServlet {
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 		
-		if(userDAO.isUser(username, password)==true){
+		if(userDAO.isUser(username, password)){
 			request.setAttribute("username", username);
-			request.getRequestDispatcher("mainPage.jsp").forward(request, response);;
+			response.sendRedirect("home.jsp");
 		}
 	}
 }
