@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.carpooling.dao.UserDAO;
+import com.carpooling.service.UserService;
 
 /**
  * Servlet implementation class UserController
@@ -27,7 +27,8 @@ public class UserRegistration extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		UserDAO userDAO = new UserDAO();
+		UserService userService = new UserService();
+		
 		HttpSession session=request.getSession();
 		String fullname = request.getParameter("fullname");
 		int gender = Integer.parseInt(request.getParameter("gender"));
@@ -41,7 +42,7 @@ public class UserRegistration extends HttpServlet {
 		String password = request.getParameter("password");
 
 		
-			if (userDAO.createUser(fullname, gender, state, city, street, zip, birthyear, email, password)){
+			if (userService.createUser(fullname, gender, state, city, street, zip, birthyear, email, password)){
 				session.setAttribute("username", email);
 				response.sendRedirect("home.jsp");
 			}	
