@@ -16,14 +16,16 @@
         <div id="login-box" class="loginBox">
             <h2>Login In</h2>
             <form name="loginForm" action="UserLogin" method="post">
-
+            <% if(request.getSession().getAttribute("error")!=null) {%>
+            <div><%= request.getSession().getAttribute("error") %>
+              </div><%} %>
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" class="form-control" />
+                    <input type="text" id="username" name="username" class="form-control" required/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" class="form-control" />
+                    <input type="password" id="password" name="password" class="form-control" required/>
                 </div>
                 <input type="submit" value="Submit" class="btn btn-success btnWidth120">
                 <input type="reset" value="Reset" class="btn btn-danger btnWidth120">

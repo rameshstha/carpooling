@@ -23,12 +23,15 @@ public class UserDAO {
 		try {
 			String sql = "SELECT email, password FROM users where email = '" + email + "' and password = '" + password
 					+ "'";
+			
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
+			
 			if (rs == null)
 				return false;
-			return true;
-
+			if (rs.next())
+			   return true;
+            return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,8 +46,6 @@ public class UserDAO {
 					+ fullname + "','" + gender + "','" + state + "','" + city + "','" + street + "','" + zip
 					+ "','"+birthyear+"','" + email + "','" + password + "');";
 
-			System.out.println(sql);
-			// Perform INSERT
 			stmt = con.createStatement();
 
 			if(stmt.executeUpdate(sql)!=0)

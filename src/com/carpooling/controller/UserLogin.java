@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.carpooling.dao.UserDAO;
 
@@ -24,12 +25,18 @@ public class UserLogin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDAO userDAO=new UserDAO();
+		HttpSession session=request.getSession();
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 		
 		if(userDAO.isUser(username, password)){
-			request.setAttribute("username", username);
+			session.setAttribute("username", username);
 			response.sendRedirect("home.jsp");
 		}
+		else{
+			session.setAttribute("error", "Incorrect Username or Password");
+			response.sendRedirect("index.jsp");
+		}
+			
 	}
 }
