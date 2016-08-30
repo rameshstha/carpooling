@@ -28,7 +28,7 @@ $(function() {
 		},
 		messages : {
 			zip : "Zip must be numbers of exactly length 5",
-			birthyear:"Sorry, only persons over the age of 18 can be registered",
+			birthyear:"Only persons over the age of 18 can register",
 			password:"Password must be atleast 6 letters having atlest one capital letter, one small letter and one number",
 			email:"Enter the valid email"
 		},
