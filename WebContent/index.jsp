@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="ct" uri="/WEB-INF/CustomTag/carpoolingCustomTag.tld"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +17,12 @@
         <div id="login-box" class="loginBox">
             <h2>Login In</h2>
             <form name="loginForm" action="UserLogin" method="post">
-            <% if(request.getSession().getAttribute("error")!=null) {%>
-            <div><%= request.getSession().getAttribute("error") %>
+            <% if(request.getSession().getAttribute("error")!=null) {
+            String error=(String)request.getSession().getAttribute("error");
+            %>
+            <div><ct:Label textColor='red' text='<%= error%>'/>
               </div><%} %>
+              
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" class="form-control" required/>
