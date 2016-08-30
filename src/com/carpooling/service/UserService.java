@@ -2,7 +2,7 @@ package com.carpooling.service;
 
 import com.carpooling.dao.UserDAO;
 
-public class UserService {
+public class UserService { 
 	UserDAO userDAO = new UserDAO();
 
 	public boolean isUser(String email, String password) {
