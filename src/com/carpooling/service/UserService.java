@@ -13,4 +13,8 @@ public class UserService {
 			int birthyear, String email, String password) {
 		return userDAO.createUser(fullname, gender, state, city, street, zip, birthyear, email, password);
 	}
+	
+	public int getUserId(String username){
+		return userDAO.getUserId(username);
+	}
 }

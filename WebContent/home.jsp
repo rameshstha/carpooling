@@ -1,38 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="com.carpooling.service.*"%>
+<%@ taglib prefix="ct" uri="/WEB-INF/CustomTag/carpoolingCustomTag.tld"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-<title>Main Page::Car</title>
+<title>Main Page::CarPool</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!--  <link rel="stylesheet" href="css/home.css">-->
-
-<link rel="stylesheet" src="bootstrap/css/bootstrap-responsive.min.css"
-	type="text/stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+	crossorigin="anonymous">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--  <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"> </script>
-  <script src="js/jquery.js" type="text/javascript"></script> -->
-<!-- Bootstrap CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- bootstrap theme -->
-<link href="css/bootstrap-theme.css" rel="stylesheet">
-
-<!-- owl carousel -->
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+	crossorigin="anonymous"></script>
+<script src="js/postData.js" type="text/javascript"></script>
+<link href="css/mypost.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-
-<!-- Custom styles -->
-
-
 <link href="css/style.css" rel="stylesheet">
-
 </head>
 
 <body>
-
 	<header class="header dark-bg">
 		<div class="toggle-nav">
 			<div class="icon-reorder tooltips"
@@ -61,307 +51,235 @@
 			<!-- notificatoin dropdown start-->
 			<ul class="nav pull-right top-menu">
 
-				<!-- task notificatoin start -->
-				<li id="task_notificatoin_bar" class="dropdown"><a
-					data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
-						class="icon-task-l"></i> <span class="badge bg-important">6</span></a>
-					<ul class="dropdown-menu extended tasks-bar">
-						<div class="notify-arrow notify-arrow-blue"></div>
-						<li>
-							<p class="blue">You have 6 pending letter</p>
-						</li>
-						<li><a href="#">
-								<div class="task-info">
-									<div class="desc">Design PSD</div>
-									<div class="percent">90%</div>
-								</div>
-								<div class="progress progress-striped">
-									<div class="progress-bar progress-bar-success"
-										role="progressbar" aria-valuenow="90" aria-valuemin="0"
-										aria-valuemax="100" style="width: 90%">
-										<span class="sr-only">90% Complete (success)</span>
-									</div>
-								</div>
-						</a></li>
-						<li><a href="#">
-								<div class="task-info">
-									<div class="desc">Project 1</div>
-									<div class="percent">30%</div>
-								</div>
-								<div class="progress progress-striped">
-									<div class="progress-bar progress-bar-warning"
-										role="progressbar" aria-valuenow="30" aria-valuemin="0"
-										aria-valuemax="100" style="width: 30%">
-										<span class="sr-only">30% Complete (warning)</span>
-									</div>
-								</div>
-						</a></li>
-						<li><a href="#">
-								<div class="task-info">
-									<div class="desc">Digital Marketing</div>
-									<div class="percent">80%</div>
-								</div>
-								<div class="progress progress-striped">
-									<div class="progress-bar progress-bar-info" role="progressbar"
-										aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-										style="width: 80%">
-										<span class="sr-only">80% Complete</span>
-									</div>
-								</div>
-						</a></li>
-						<li><a href="#">
-								<div class="task-info">
-									<div class="desc">Logo Designing</div>
-									<div class="percent">78%</div>
-								</div>
-								<div class="progress progress-striped">
-									<div class="progress-bar progress-bar-danger"
-										role="progressbar" aria-valuenow="78" aria-valuemin="0"
-										aria-valuemax="100" style="width: 78%">
-										<span class="sr-only">78% Complete (danger)</span>
-									</div>
-								</div>
-						</a></li>
-						<li><a href="#">
-								<div class="task-info">
-									<div class="desc">Mobile App</div>
-									<div class="percent">50%</div>
-								</div>
-								<div class="progress progress-striped active">
-									<div class="progress-bar" role="progressbar" aria-valuenow="50"
-										aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-										<span class="sr-only">50% Complete</span>
-									</div>
-								</div>
-
-						</a></li>
-						<li class="external"><a href="#">See All Tasks</a></li>
-					</ul></li>
-				<!-- task notificatoin end -->
-				<!-- inbox notificatoin start-->
-				<li id="mail_notificatoin_bar" class="dropdown"><a
-					data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-						class="icon-envelope-l"></i> <span class="badge bg-important">5</span>
-				</a>
-					<ul class="dropdown-menu extended inbox">
-						<div class="notify-arrow notify-arrow-blue"></div>
-						<li>
-							<p class="blue">You have 5 new messages</p>
-						</li>
-						<li><a href="#"> <span class="photo"><img
-									alt="avatar" src="./img/avatar-mini.jpg"></span> <span
-								class="subject"> <span class="from">Greg Martin</span> <span
-									class="time">1 min</span>
-							</span> <span class="message"> I really like this admin panel. </span>
-						</a></li>
-						<li><a href="#"> <span class="photo"><img
-									alt="avatar" src="./img/avatar-mini2.jpg"></span> <span
-								class="subject"> <span class="from">Bob Mckenzie</span> <span
-									class="time">5 mins</span>
-							</span> <span class="message"> Hi, What is next project plan? </span>
-						</a></li>
-						<li><a href="#"> <span class="photo"><img
-									alt="avatar" src="./img/avatar-mini3.jpg"></span> <span
-								class="subject"> <span class="from">Phillip Park</span> <span
-									class="time">2 hrs</span>
-							</span> <span class="message"> I am like to buy this Admin
-									Template. </span>
-						</a></li>
-						<li><a href="#"> <span class="photo"><img
-									alt="avatar" src="./img/avatar-mini4.jpg"></span> <span
-								class="subject"> <span class="from">Ray Munoz</span> <span
-									class="time">1 day</span>
-							</span> <span class="message"> Icon fonts are great. </span>
-						</a></li>
-						<li><a href="#">See all messages</a></li>
-					</ul></li>
 				<!-- inbox notificatoin end -->
 				<!-- alert notification start-->
 				<li id="alert_notificatoin_bar" class="dropdown"><a
 					data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
 						class="icon-bell-l"></i> <span class="badge bg-important">7</span>
-				</a>
-					<ul class="dropdown-menu extended notification">
-						
-						<li>
-							<p class="blue">You have 4 new notifications</p>
-						</li>
-						<li><a href="#"> <span class="label label-primary"><i
-									class="icon_profile"></i></span> Friend Request <span
-								class="small italic pull-right">5 mins</span>
-						</a></li>
-						<li><a href="#"> <span class="label label-warning"><i
-									class="icon_pin"></i></span> John location. <span
-								class="small italic pull-right">50 mins</span>
-						</a></li>
-						<li><a href="#"> <span class="label label-danger"><i
-									class="icon_book_alt"></i></span> Project 3 Completed. <span
-								class="small italic pull-right">1 hr</span>
-						</a></li>
-						<li><a href="#"> <span class="label label-success"><i
-									class="icon_like"></i></span> Mick appreciated your work. <span
-								class="small italic pull-right"> Today</span>
-						</a></li>
-						<li><a href="#">See all notifications</a></li>
-					</ul></li>
+				</a></li>
 				<!-- alert notification end-->
 				<!-- user login dropdown start-->
 				<li class="dropdown"><a data-toggle="dropdown"
 					class="dropdown-toggle" href="#"> <span class="profile-ava">
 							<img alt="" src="img/avatar1_small.jpg">
-					</span> <span class="username"><%= request.getSession().getAttribute("username") %></span> <b class="caret"></b>
-				    </a>
+					</span> <span class="username"><%=request.getSession().getAttribute("username")%></span>
+						<b class="caret"></b>
+				</a>
 					<ul class="dropdown-menu extended logout">
 						<div class="log-arrow-up"></div>
 						<li class="eborder-top"><a href="#"><i
 								class="icon_profile"></i> My Profile</a></li>
-						<li><a href="#"><i class="icon_mail_alt"></i> My Inbox</a></li>
-						<li><a href="#"><i class="icon_clock_alt"></i> Timeline</a></li>
-						<li><a href="#"><i class="icon_chat_alt"></i> Chats</a></li>
-						<li><a href="LogOut"><i class="icon_key_alt"></i> Log
-								Out</a></li>
+						<li><a href="#"><i class="icon_mail_alt"></i> My Post</a></li>
 						<li><a href="documentation.html"><i class="icon_key_alt"></i>
 								Documentation</a></li>
-						<li><a href="documentation.html"><i class="icon_key_alt"></i>
-								Documentation</a></li>
+						<li><a href="LogOut"><i class="icon_key_alt"></i> Log Out</a></li>
 					</ul></li>
-				<!-- user login dropdown end -->
+				<!-- user login drop down end -->
 			</ul>
-			<!-- notificatoin dropdown end-->
+			<!-- notification drop down end-->
 		</div>
 	</header>
-
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<div class="container text-center">
 		<div class="row">
+
+			<!--  left side bar -->
 			<div class="col-sm-3 well">
 				<div class="well">
 					<p>
 						<a href="#">My Profile</a>
 					</p>
-					<img src="bird.jpg" class="img-circle" height="65" width="65"
-						alt="Avatar">
+					<img src="img/avatar1_small.jpg" class="img-circle" height="65"
+						width="65" alt="Avatar">
 				</div>
 				<div class="well">
 					<p>
-						<a href="#">Interests</a>
+						<a href="#">Most Carpooled Location</a>
 					</p>
 					<p>
-						<span class="label label-default">News</span> <span
-							class="label label-primary">W3Schools</span> <span
-							class="label label-success">Labels</span> <span
-							class="label label-info">Football</span> <span
-							class="label label-warning">Gaming</span> <span
-							class="label label-danger">Friends</span>
+						<span class="label label-default">Fairfield</span> <span
+							class="label label-primary">Ottumba</span> <span
+							class="label label-success">Mt. Plesant</span> <span
+							class="label label-info">Iowa City</span> <span
+							class="label label-warning">Fairfield</span> <span
+							class="label label-danger">Fairfield</span>
 					</p>
 				</div>
-
-				<p>
-					<a href="#">Link</a>
-				</p>
-				<p>
-					<a href="#">Link</a>
-				</p>
-				<p>
-					<a href="#">Link</a>
-				</p>
+				<div class="well">
+					<div id="map" style="width: 200px; height: 200px"></div>
+				</div>
 			</div>
-			<div class="col-sm-7">
+			<div class="container">
+				<div class="col-md-9">
 
-				<div class="row">
-					<div class="col-sm-12">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="active"><a href="#posts" role="tab"
+							data-toggle="tab">Posts Ride</a></li>
+						<li><a href="##askforride" role="tab" data-toggle="tab">Ask
+								For Ride</a></li>
+					</ul>
 
-						<div class="alert alert-success fade in">
-							<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-							<p>
-								<strong>New!</strong>
-							</p>
-							New: Mt. plesent to Ottumba, Time: 3Pm
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="posts">
+							<!-- first tab-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<strong>Ride Offer</strong>
+								</div>
+								<%
+									if (request.getSession().getAttribute("errorPosting") != null) {
+										String errorPosting = (String) request.getSession().getAttribute("errorPosting");
+								%>
 
-						</div>
-					</div>
-				</div>
+								<div>
+									<ct:Label textColor='red' text='<%=errorPosting%>' />
+								</div>
+								<%
+									}
+								%>
+								<form class="form center-block" action="PostInfo" method="post">
+									<div class="modal-body">
 
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="well">
-							<p>John</p>
-							<img src="bird.jpg" class="img-circle" height="55" width="55"
-								alt="Avatar">
+										<div class="form-group">
+											<textarea class="form-control input-md" autofocus
+												placeholder="What do you want to share?" name="post"></textarea>
+										</div>
+
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-primary btn-md" data-dismiss="modal"
+											aria-hidden="true">Post</button>
+										<div class="col-xs-2">
+											<input class="form-control" placeholder="From" id="from"
+												name="from" type="text" required>
+										</div>
+										<div class="col-xs-2">
+											<input class="form-control" placeholder="To" id="to"
+												name="to" type="text" required>
+										</div>
+										<div class="col-xs-2">
+											<input class="form-control" placeholder="Seats" id="seat"
+												name="seat" type="text" required>
+										</div>
+										<div class="col-xs-3">
+											<input class="form-control" placeholder="MM/DD/YYYY HH:MM"
+												id="date" name="dateandTime" type="text" required>
+										</div>
+										<div class="col-xs-2">
+											<div class="radio">
+												<label><input type="radio" name="posttype" value="1"
+													checked>Ride(Offer)</label>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<!-- existing post listing -->
+
+							<div class="col-md-12">
+								<ul class="list-inline social-links"></ul>
+								<ul class="list-inline social-links"></ul>
+								<%
+									if (request.getSession().getAttribute("jsonArray") != null) {
+										JSONArray jsonArray = (JSONArray) request.getSession().getAttribute("jsonArray");
+								%>
+								<input type="hidden" value='<%=jsonArray%>' id="postData">
+
+								<%
+									}
+								%>
+								<div class="well">
+									<div id="mainContainer"></div>
+									<div id="loader"></div>
+								</div>
+							</div>
+							<!-- last first tab-->
 						</div>
-					</div>
-					<div class="col-sm-9">
-						<div class="well">
-							<p>
-								<strong>Asking for a ride</strong>
-							</p>
-							<p>Just Forgot that I had to mention something about someone
-								to someone about how I forgot something, but now I forgot it.
-								Ahh, forget it! Or wait. I remember.... no I don't.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="well">
-							<p>Bo</p>
-							<img src="bandmember.jpg" class="img-circle" height="55"
-								width="55" alt="Avatar">
-						</div>
-					</div>
-					<div class="col-sm-9">
-						<div class="well">
-							<p>
-								<strong>Asking for a ride</strong>
-							</p>
-							<p>Just Forgot that I had to mention something about someone
-								to someone about how I forgot something, but now I forgot it.
-								Ahh, forget it! Or wait. I remember.... no I don't.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="well">
-							<p>Jane</p>
-							<img src="bandmember.jpg" class="img-circle" height="55"
-								width="55" alt="Avatar">
-						</div>
-					</div>
-					<div class="col-sm-9">
-						<div class="well">
-							<p>
-								<strong>Asking for a ride</strong>
-							</p>
-							<p>Just Forgot that I had to mention something about someone
-								to someone about how I forgot something, but now I forgot it.
-								Ahh, forget it! Or wait. I remember.... no I don't.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="well">
-							<p>Anja</p>
-							<img src="bird.jpg" class="img-circle" height="55" width="55"
-								alt="Avatar">
-						</div>
-					</div>
-					<div class="col-sm-9">
-						<div class="well">
-							<p>Just Forgot that I had to mention something about someone
-								to someone about how I forgot something, but now I forgot it.
-								Ahh, forget it! Or wait. I remember.... no I don't.</p>
+						<div class="tab-pane" id="askforride">
+						<!-- second tab -->
+						<div class="modal-content">
+								<div class="modal-header">
+									<strong>Ask For Ride</strong>
+								</div>
+								<%
+									if (request.getSession().getAttribute("errorAskForRide") != null) {
+										String errorAskForRide = (String) request.getSession().getAttribute("errorAskForRide");
+								%>
+
+								<div>
+									<ct:Label textColor='red' text='<%=errorAskForRide%>' />
+								</div>
+								<%
+									}
+								%>
+								<form class="form center-block" action="PostInfoRide" method="post">
+									<div class="modal-body">
+
+										<div class="form-group">
+											<textarea class="form-control input-md" autofocus
+												placeholder="What do you want to share?" name="postRide"></textarea>
+										</div>
+
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-primary btn-md" data-dismiss="modal"
+											aria-hidden="true">Post</button>
+										<div class="col-xs-2">
+											<input class="form-control" placeholder="From" id="fromRide"
+												name="fromRide" type="text" required>
+										</div>
+										<div class="col-xs-2">
+											<input class="form-control" placeholder="To" id="toRide"
+												name="toRide" type="text" required>
+										</div>
+										<div class="col-xs-2">
+											<input class="form-control" placeholder="Seats" id="seatRide"
+												name="seatRide" type="text" required>
+										</div>
+										<div class="col-xs-3">
+											<input class="form-control" placeholder="MM/DD/YYYY HH:MM"
+												id="date" name="dateandTimeRide" type="text" required>
+										</div>
+										<div class="col-xs-2">
+											<div class="radio">
+												<label><input type="radio" name="posttypeRide" value="0" checked>Ride(Asking)</label>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<!-- existing post listing -->
+
+							<div class="col-md-12">
+								<ul class="list-inline social-links"></ul>
+								<ul class="list-inline social-links"></ul>
+								<%
+									if (request.getSession().getAttribute("jsonArrayRide") != null) {
+										JSONArray jsonArrayRide = (JSONArray) request.getSession().getAttribute("jsonArrayRide");
+								%>
+								<input type="hidden" value='<%= jsonArrayRide%>' id="postDataRide">
+
+								<%
+									}
+								%>
+								<div class="well">
+									<div id="mainContainerRide"></div>
+								</div>
+							</div>
+						<!-- end second tab -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<footer class="container-fluid text-center">
-		<p>Footer Text</p>
-	</footer>
-
 </body>
-
 </html>
+

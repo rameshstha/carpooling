@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.carpooling.service.JSONArray;
+import com.carpooling.service.PostService;
 import com.carpooling.service.UserService;
 
 /**
@@ -17,7 +19,10 @@ import com.carpooling.service.UserService;
 @WebServlet("/UserLogin")
 public class UserLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    JSONArray jsonArray=new JSONArray();
+    JSONArray jsonArrayRide=new JSONArray();
+    
+    PostService postService=new PostService();
     public UserLogin() {
         super();
         // TODO Auto-generated constructor stub
@@ -31,7 +36,17 @@ public class UserLogin extends HttpServlet {
 		
 		if(userService.isUser(username, password)){
 			session.setAttribute("username", username);
-			response.sendRedirect("home.jsp");
+			
+			jsonArray = postService.getPostDetails();
+			jsonArrayRide = postService.getPostDetailsRide();
+			if (jsonArray == null||jsonArrayRide==null)
+				System.out.println("errorJSON");
+			else {
+				session.setAttribute("jsonArray", jsonArray);
+				session.setAttribute("jsonArrayRide", jsonArrayRide);
+				response.sendRedirect("home.jsp");
+			}
+			
 		}
 		else{
 			session.setAttribute("error", "Incorrect Username or Password");
