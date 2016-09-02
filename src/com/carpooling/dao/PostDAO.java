@@ -5,13 +5,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import com.carpooling.service.JSONArray;
-import com.carpooling.service.JSONObject;
 
 public class PostDAO {
 	ConnectManager cm;
 	Connection con;
-	Statement stmt,stmt1,stmt2,stmt3,stmt4;
-	ResultSet rs,rs1,rs2;
+	Statement stmt,stmt1,stmt2,stmt3,stmt4,stmt5;
+	ResultSet rs,rs1,rs2,rs3;
 
 	public PostDAO() {
 		try {
@@ -153,6 +152,26 @@ public class PostDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@SuppressWarnings("static-access")
+	public JSONArray getLatLong() {
+		JSONArray jsonArrayLatLong = new JSONArray();
+		try {
+
+			String sql = "Select source,destination from posts where posttype='1'";
+			stmt4 = con.createStatement();
+			rs3 = stmt4.executeQuery(sql);
+
+			if (rs3 == null) {
+				return null;
+			} else {
+				return jsonArrayLatLong.convertResultSetIntoJSON(rs3);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

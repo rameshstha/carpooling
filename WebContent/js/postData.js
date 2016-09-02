@@ -87,9 +87,6 @@ function loadPostDetails(data) {
 				  my.after($(allContent));
 			})
 			
-			// alert("hellow");
-			
-
 		});
 		
 		
@@ -119,8 +116,7 @@ function loadPostDetailsRide(data) {
 		alert("Data needed");
 	} else {
 
-		$
-				.ajax({
+		$.ajax({
 					"type" : "GET",
 					"data" : JSON.parse(data)
 

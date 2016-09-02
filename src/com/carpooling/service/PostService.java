@@ -29,5 +29,8 @@ public boolean addLike(int userid, int postid) {
 	return postDAO.getLike(userid,postid);
 	
 }
+public JSONArray getLatLong() {
+	return postDAO.getLatLong();
+}
 
 }
