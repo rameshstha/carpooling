@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.carpooling.service.JSONArray;
+
 public class UserDAO {
 	ConnectManager cm;
 	Connection con;
-	Statement stmt;
-	ResultSet rs;
+	Statement stmt, stmt1,stmt2;
+	ResultSet rs, rs1;
 
 	public UserDAO() {
 		try {
@@ -39,6 +41,29 @@ public class UserDAO {
 
 	}
 
+	@SuppressWarnings("unused")
+	public JSONArray userEdit(String email) {
+		JSONArray jsonArray = new JSONArray();
+		try {
+			String sql1 = "SELECT * FROM users where email='" + email + "'";
+			stmt1 = con.createStatement();
+			rs1 = stmt1.executeQuery(sql1);
+			if (rs1 == null) {
+				return null;
+			}
+			return JSONArray.convertResultSetIntoJSON(rs1);
+			/*
+			 * if (rs1.next()) {
+			 * System.out.println("sadfasdfasdf====="+rs1.getString(1)); return
+			 * JSONArray.convertResultSetIntoJSON(rs1); }
+			 */
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public boolean createUser(String fullname, int gender, String state, String city, String street, int zip,
 			int birthyear, String email, String password) {
 		try {
@@ -58,24 +83,24 @@ public class UserDAO {
 		return false;
 	}
 
-	public int getUserId(String email) {
+	public boolean userEdit(int userid, String fullname, int gender, String state, String city, String street,
+			int zip, int birthyear, String email, String password) {
 		try {
-			String sql = "SELECT userid from users where email = '" + email + "'";
-			
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sql);
+			Statement	stmtUpdateProfile;
+			String sql1 = "update users set fullname='" + fullname + "',gender='" + gender + "',state='" + state
+					+ "',city='" + city + "',street='" + street + "',zipcode='" + zip + "',birthyear='"
+					+ birthyear + "',email='" + email + "',password='" + password + "' where userid='"+userid+"'";
+            
+			System.out.println("userEdit sql"+sql1);
+			stmtUpdateProfile = con.createStatement();
 
-			if (rs == null)
-				return 0;
-			if (rs.next()) {
-				return rs.getInt("userid");
-			}
-			return 0;
+			if (stmtUpdateProfile.executeUpdate(sql1) != 0)
+				return true;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return 0;
-
+		return false;
 	}
 
 }

@@ -13,4 +13,21 @@ public JSONArray getPostDetails(){
 public JSONArray getPostDetailsRide(){
 	return postDAO.getPostDetailsRide();
 }
+
+public boolean updateStatus(){
+	return postDAO.updateStatus();
+}
+
+public boolean addComment(int userid, int postid, String comment){
+	return postDAO.addComment(userid, postid,comment);
+}
+
+public JSONArray getComment(int userid, int postid){
+	return postDAO.getComment(userid,postid);
+}
+public boolean addLike(int userid, int postid) {
+	return postDAO.getLike(userid,postid);
+	
+}
+
 }

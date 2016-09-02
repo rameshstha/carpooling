@@ -1,6 +1,8 @@
 package com.carpooling.controller;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.carpooling.service.UserService;
+import com.carpooling.service.UserService_old;
 
 /**
  * Servlet implementation class UserController
@@ -17,6 +19,7 @@ import com.carpooling.service.UserService;
 @WebServlet("/UserRegistration")
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	StringBuffer stringBuffer;
 
 	/**
 	 * Default constructor.
@@ -27,7 +30,7 @@ public class UserRegistration extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		UserService userService = new UserService();
+		UserService_old userService = new UserService_old();
 		
 		HttpSession session=request.getSession();
 		String fullname = request.getParameter("fullname");
@@ -41,8 +44,22 @@ public class UserRegistration extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
+		MessageDigest messageDigest;
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(password.getBytes());
+            byte[] messageDigestMD5 = messageDigest.digest();
+            stringBuffer = new StringBuffer();
+            for (byte bytes : messageDigestMD5) {
+                stringBuffer.append(String.format("%02x", bytes & 0xff));
+            }
+           
+        } catch (NoSuchAlgorithmException exception) {
+     // TODO Auto-generated catch block
+            exception.printStackTrace();
+        }
 		
-			if (userService.createUser(fullname, gender, state, city, street, zip, birthyear, email, password)){
+			if (userService.createUser(fullname, gender, state, city, street, zip, birthyear, email, stringBuffer.toString())){
 				session.setAttribute("username", email);
 				response.sendRedirect("home.jsp");
 			}	

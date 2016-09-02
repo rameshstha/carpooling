@@ -5,31 +5,12 @@ $(function() {
 	}).ajaxStop(function() {
 		$(this).hide();
 	});
-	
-	
-	
-	window.onload = function() {
+
 		loadPostDetails($('#postData').val());
 		loadPostDetailsRide($('#postDataRide').val());
-	}
-
 });
 
-/*
- * function loadPostDetails(data){ var html='';
- * 
- * console.log(JSON.parse(data).length); for(var i=0;i<JSON.parse(data).length;i++){
- * console.log(JSON.parse(data)[i].fullname);
- * 
- * console.log(data); $.each(JSON.parse(data),function(index,item){
- * console.log("test=="+item.fullname); html+='<p><span>Name: </span><em>'+item.fullname+'</em><span>Email:
- * </span>'; html+='<p>'+item.post+'</p>'; });
- * 
- * $('#postInfo').html('').html(html); // loadPost(); }
- */
-
 function loadPostDetails(data) {
-
 	$("#mainContainer").html("");
 	if (data == "") {
 		alert("Data needed");
@@ -43,72 +24,88 @@ function loadPostDetails(data) {
 				})
 				.done(
 						function() {
+							var test_html ="";
 							for (var i = 0; i < JSON.parse(data).length; i++) {
-								$("#mainContainer").append("<div class=\"box\">");
-								$("#mainContainer").append(
-										"<p><em>" + JSON.parse(data)[i].source +"</em>&nbsp; to &nbsp; <em>"+JSON.parse(data)[i].destination
-												+ "</em></p>");
-								$("#mainContainer").append(
-										"<p>" + JSON.parse(data)[i].seat+"<em> Seat Required :: Non Smoker"
-												+ "</em></p>");
-								$("#mainContainer").append(
-										"<p>On:" + JSON.parse(data)[i].dateandtime + "</em>,&nbsp;<em> By: " + JSON.parse(data)[i].fullname
-												+ "</em></p>");
-				
-								$("#mainContainer")
-										.append(
-												" <em><button id=\"likeClick\" class=\"btn btn-success\" data-postid=\""
-														+ JSON.parse(data)[i].postid
-														+ "\">Like</button>&nbsp;&nbsp;<button id=\"showComment\" class=\"btn btn-default\" data-postid=\""
-														+ JSON.parse(data)[i].postid
-														+ "\">Show Comment</button></em></p>");
-								$("#mainContainer").append("</div>");
+								
+								test_html += "<div class='box' id='post_box"+JSON.parse(data)[i].postid+"'  style='width:100%; border:1px' ><p><em>" + JSON.parse(data)[i].source +"</em>&nbsp; to &nbsp; <em>"+JSON.parse(data)[i].destination 
+								+ "</em></p>"+"<p>" + JSON.parse(data)[i].seat+"<em> Seat Required :: Non Smoker"
+								+ "</em></p>"+"<p>On:" + JSON.parse(data)[i].dateandtime + "</em>,&nbsp;<em> By: " + JSON.parse(data)[i].fullname
+								+ "</em></p>"+" <em><button id=\"likeClick\" class=\"btn btn-success\" data-postid=\""
+								+ JSON.parse(data)[i].postid
+								+ "\">Like</button>&nbsp;&nbsp;<button id=\"showComment\" class=\"btn btn-default\" data-postid=\""
+								+ JSON.parse(data)[i].postid
+								+ "\">Show Comment</button></em></p>"+"<div id='sho_comment_div"+JSON.parse(data)[i].postid+"' hidden><textarea rows='2' cols='25'  class='commentbox' data-postid=\""
+												+ JSON.parse(data)[i].postid+"\"></textarea></div>"+"</div>";
+								
 							}
-
+							$("#mainContainer").html(test_html);
 						}).fail(
 						function(xhr, statusText, errorText) {
 							$("#mainContainer").html(
 									"<div class='error'><h1>" + xhr.status
 											+ "</h1>" + errorText + "</div>");
-							// console.log(xhr.status+" -- "+statusText+" --
-							// "+errorText);
-
+							
 						});
+		
+		$(document).on("keypress",".commentbox",function(e){
+			if(e.which==13){
+				var comment=$(this).val();
+				var postid = $(this).data("postid");
+							
+				$.ajax("/Carpooling/Comment",{
+					"type":"post",
+					"data":{"comment":comment,"postid":postid}
+				}).success(function(response){
+					if(response!=null){
+						$(".alert-success").show("slow").html("Added Comment Sucessfully");
+						location.href=location.href;
+					}
+				});
+				
+			}
+		});
+		
 		$("#mainContainer").on("click", "#showComment", function() {
+			
+			
 			var postid = $(this).data("postid");
+			
 			var my = $(this);
+			var currenDivtId = "sho_comment_div"+postid;
+			$("#"+currenDivtId).show();
+		
 			$.ajax({
-				"type" : "GET"
+				"url":"/Carpooling/Comment",
+				"type" : "GET",
+				"data":{"postid":postid}
 			}).done(function(allcomment) {
-				/*
-				 * var allContent = "<div class='comment'> "; for (var j = 0; j <
-				 * allcomment.length; j++) { allContent += "<div class='cname'><strong>Comments
-				 * By: </strong>" + allcomment[j].name + " <em> "+
-				 * allcomment[j].email+" </em></div>"; allContent += "<div
-				 * class='cbody'>" + allcomment[j].body + "</div>"; }
-				 * allContent += "</div>"; my.after($(allContent)); my.hide();
-				 */
-				console.log(postid);
-
+				var allContent=" ";
+				  allContent = "<div> "; 
+				  for (var j = 0; j <JSON.parse(allcomment).length; j++) { 
+					  allContent += "<p>"+JSON.parse(allcomment)[j].comment +"</p><br>"; 
+				  		}
+				  allContent += "</div>"; 
+				  my.after($(allContent));
 			})
+			
+			// alert("hellow");
+			
 
 		});
+		
+		
 		$("#mainContainer").on("click", "#likeClick", function() {
 			var postid = $(this).data("postid");
-			var userid = $(this).data("postid");
 			var my = $(this);
 			$.ajax({
-				"type" : "GET"
-			}).done(function(allcomment) {
-				/*
-				 * var allContent = "<div class='comment'> "; for (var j = 0; j <
-				 * allcomment.length; j++) { allContent += "<div class='cname'><strong>Comments
-				 * By: </strong>" + allcomment[j].name + " <em> "+
-				 * allcomment[j].email+" </em></div>"; allContent += "<div
-				 * class='cbody'>" + allcomment[j].body + "</div>"; }
-				 * allContent += "</div>"; my.after($(allContent)); my.hide();
-				 */
-				console.log(postid);
+				"url":"/Carpooling/Like",
+				"type" : "POST",
+				"data":{"postid":postid}
+			}).done(function(response) {
+				if(response!=null){
+					$(".alert-success").show("slow").html("Like Sucessfully");
+					location.href=location.href;
+				}
 
 			})
 
@@ -162,47 +159,7 @@ function loadPostDetailsRide(data) {
 							// "+errorText);
 
 						});
-		$("#mainContainerRide").on("click", "#showCommentRide", function() {
-			var postid = $(this).data("postidRide");
-			var my = $(this);
-			$.ajax({
-				"type" : "GET"
-			}).done(function(allcomment) {
-				/*
-				 * var allContent = "<div class='comment'> "; for (var j = 0; j <
-				 * allcomment.length; j++) { allContent += "<div class='cname'><strong>Comments
-				 * By: </strong>" + allcomment[j].name + " <em> "+
-				 * allcomment[j].email+" </em></div>"; allContent += "<div
-				 * class='cbody'>" + allcomment[j].body + "</div>"; }
-				 * allContent += "</div>"; my.after($(allContent)); my.hide();
-				 */
-				console.log(postid);
-
-			})
-
-		});
-		$("#mainContainerRide").on("click", "#likeClickRide", function() {
-			var postid = $(this).data("postid");
-			var userid = $(this).data("postid");
-			var my = $(this);
-			$.ajax({
-				"type" : "GET"
-			}).done(function(allcomment) {
-				/*
-				 * var allContent = "<div class='comment'> "; for (var j = 0; j <
-				 * allcomment.length; j++) { allContent += "<div class='cname'><strong>Comments
-				 * By: </strong>" + allcomment[j].name + " <em> "+
-				 * allcomment[j].email+" </em></div>"; allContent += "<div
-				 * class='cbody'>" + allcomment[j].body + "</div>"; }
-				 * allContent += "</div>"; my.after($(allContent)); my.hide();
-				 */
-				console.log(postid);
-
-			})
-
-		});
+		
 	}
 };
-
-
 

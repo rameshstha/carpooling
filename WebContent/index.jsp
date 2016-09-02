@@ -13,8 +13,8 @@
 </head>
 <body>
 	<div class="container-wrapper">
-    <div class="container">
-        <div id="login-box" class="loginBox">
+    <div style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-2">
+        <div id="login-box" class="loginBox" >
             <h2>Login In</h2>
             <form name="loginForm" action="UserLogin" method="post">
             <% if(request.getSession().getAttribute("error")!=null) {
@@ -25,7 +25,7 @@
               
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" class="form-control" required/>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Email" required/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>

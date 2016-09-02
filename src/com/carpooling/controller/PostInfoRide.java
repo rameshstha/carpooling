@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.carpooling.service.JSONArray;
 import com.carpooling.service.PostService;
-import com.carpooling.service.UserService;
+import com.carpooling.service.UserService_old;
 
 /**
  * Servlet implementation class PostInfoRide
@@ -28,7 +28,7 @@ public class PostInfoRide extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		session=request.getSession();
-		UserService userService = new UserService();
+		UserService_old userService = new UserService_old();
 		String username = (String) request.getSession().getAttribute("username");
 
 		userid = userService.getUserId(username);
