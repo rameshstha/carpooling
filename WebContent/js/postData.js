@@ -16,8 +16,7 @@ function loadPostDetails(data) {
 		alert("Data needed");
 	} else {
 
-		$
-				.ajax({
+		$.ajax({
 					"type" : "GET",
 					"data" : JSON.parse(data)
 
